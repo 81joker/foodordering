@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            // $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->string('customer_phone');
+            $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
+            $table->date('booking_date');
+            $table->time('booking_time');
+            $table->unsignedInteger('number_of_guests');
+            $table->text('comments')->nullable();
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
