@@ -18,9 +18,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-tag"></span>
                         <span class="mtext">Cuisines</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.foods.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-egg-fried"></span>
+                        <span class="mtext">Foods</span>
                     </a>
                 </li>
                 {{-- <li>
@@ -29,12 +35,7 @@
                         <span class="mtext">Restaurants</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('admin.foods.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-egg-fried"></span>
-                        <span class="mtext">Foods</span>
-                    </a>
-                </li> --}}
+                --}}
                 {{-- <li>
                     <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-tag"></span>

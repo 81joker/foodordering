@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CuisineController;
 
 Route::get('/', function () {
     return view('admin.layouts.app');
@@ -20,4 +22,6 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     // Other admin routes can be defined here
     Route::resource('users', UserController::class);
+    Route::resource('foods', FoodController::class);
+    Route::resource('cuisines', CuisineController::class);
 });
