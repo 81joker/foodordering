@@ -1,36 +1,26 @@
+set -e
+
 echo "Running deploy script on remote host: $(hostname)"
 
-echo "Repository remotes:"
-git remote -v || true
+cd "${{ secrets.APP_PATH }}"
 
-BRANCH="${{ github.ref_name }}"
-if [ -z "$BRANCH" ]; then
-  BRANCH="main"
-fi
-echo "Deploying branch: $BRANCH"
+echo "Deploying branch: main"
 
-echo "[1/6] Fetching remotes"
-git fetch --all --prune || echo "git fetch failed (continuing)"
+git fetch --all --prune
+git reset --hard origin/main
 
-echo "[2/6] Resetting to origin/$BRANCH (will discard local changes)"
-git reset --hard origin/"$BRANCH" || git pull origin "$BRANCH"
-
-echo "[3/6] Ensure database file exists"
 touch database/database.sqlite
 
-echo "[4/6] Installing composer dependencies (remote)"
 composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
 
-echo "[5/6] Running artisan tasks"
 php artisan migrate --force
-php artisan config:cache || true
-php artisan route:cache || true
-php artisan view:cache || true
+php artisan optimize:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 
-echo "[6/6] Fix permissions and finish"
-chmod -R 775 storage bootstrap/cache || true
+chmod -R 775 storage bootstrap/cache
 
-echo "Deployed commit:"
 git --no-pager log -1 --pretty=oneline
 
 echo "The app has been built and deployed!"
