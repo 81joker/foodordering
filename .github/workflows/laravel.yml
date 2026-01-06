@@ -47,15 +47,30 @@ jobs:
 
       # - name: Run Deprecation Checker
       # #   run: vendor/bin/deprecation-detector detect:run src/
-      
+
       - name: Run Laravel Pint
         run: vendor/bin/pint --test
 
-    # - name: Upload Code Coverage
-    #   uses: codecov/codecov-action@v3
-    #   with:
-    #     files: ./storage/logs/coverage.xml
-    #     fail_ci_if_error: true
-    #     verbose: true
-    #     flags: unittests
-    #     name: codecov-umbrella-laravel-foor-ordering
+      # - name: Upload Code Coverage
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     files: ./storage/logs/coverage.xml
+      #     fail_ci_if_error: true
+      #     verbose: true
+      #     flags: unittests
+      #     name: codecov-umbrella-laravel-foor-ordering
+
+      # --- Deploy to Production  ---#
+      - name: Deploy Backend using ssh
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+
+            cd ${{ secrets.APP_PATH }} || { echo "Path not found: ${{ secrets.APP_PATH }}"; exit 1; }
+            bash backend/deploy.sh
+            echo "Backend deployed successfully"
