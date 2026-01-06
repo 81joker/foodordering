@@ -72,8 +72,7 @@ jobs:
           timeout: 60s
           script: |
             set -e
-
-            cd ${{ secrets.APP_PATH }} || { echo "Path not found: ${{ secrets.APP_PATH }}"; exit 1; }
+            cd "${{ secrets.APP_PATH }}"
 
             echo "Running deploy script on remote host: $(hostname)"
 
