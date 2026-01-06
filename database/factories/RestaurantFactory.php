@@ -23,6 +23,7 @@ class RestaurantFactory extends Factory
             'phone_number' => $this->faker->phoneNumber(),
             'delivery_fee' => $this->faker->randomFloat(2, 0, 20),
             'avg_rating' => $this->faker->randomFloat(2, 1, 5),
+
         ];
     }
 }
