@@ -70,6 +70,6 @@ jobs:
           script: |
             set -e
 
-            cd ${{ secrets.APP_PATH }} || { echo "Path not found: ${{ secrets.APP_PATH }}"; exit 1; }
-            bash /deploy.sh
-            echo "Backend deployed successfully"
+            cd ${{ secrets.APP_PATH }}
+            composer install --no-dev --prefer-dist --no-interaction
+            php artisan optimize:clear
