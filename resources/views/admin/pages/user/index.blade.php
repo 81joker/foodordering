@@ -10,7 +10,7 @@
 
                     <div class="clearfix mb-20">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Users</h4>
+                            <h4 class="text-blue h4">Users XX</h4>
                         </div>
                         <div class="pull-right">
                             <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
