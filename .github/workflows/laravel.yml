@@ -3,8 +3,6 @@ name: Laravel Foor Ordering
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
 jobs:
   laravel-tests:
