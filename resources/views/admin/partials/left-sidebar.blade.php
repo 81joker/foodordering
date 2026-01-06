@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">
+                    <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-tag"></span>
                         <span class="mtext">Cuisines</span>
                     </a>

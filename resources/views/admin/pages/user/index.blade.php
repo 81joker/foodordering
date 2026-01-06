@@ -89,9 +89,9 @@
                     </div>
 
                     <!-- Pagination -->
-                    {{-- <div class="mt-3">
+                    <div class="mt-3">
                         {{ $users->links('admin.pagination.custom') }}
-                    </div> --}}
+                    </div>
 
                 </div>
                 <!-- Responsive tables End -->
