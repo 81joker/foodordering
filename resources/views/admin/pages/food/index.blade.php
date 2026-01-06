@@ -47,9 +47,9 @@
                                             @php
                                                 $imagePath = public_path("images/foods/{$food->id}/1.jpg");
                                             @endphp
-                                            @dd($food)
-                                            @if (isset($imagePath))
-                                                <img src="{{ asset("images/foods/{$food->id}/.jpg") }}"
+
+                                            @if (file_exists($imagePath))
+                                                <img src="{{ asset('images/foods/' . $food->id . '/1.jpg') }}"
                                                     alt="{{ $food->name }}" width="60" height="60"
                                                     style="object-fit:cover; border-radius:5px;">
                                             @else

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->decimal('avg_rating', 3, 2)->default(0.00);
             $table->integer('total_orders')->default(0);
             $table->boolean('is_available')->default(true);
-            $table->json('images')->nullable();
+            // $table->json('images')->nullable();
             $table->timestamps();
         });
     }
