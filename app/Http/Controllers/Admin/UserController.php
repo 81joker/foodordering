@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,13 +59,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+
         return view('admin.pages.user.update', compact('user'));
     }
-
 
     public function destroy($id)
     {
         User::destroy($id);
+
         return back()->with('success', 'User supprimé');
     }
 }
