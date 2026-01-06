@@ -23,7 +23,7 @@ class CuisineRequest extends FormRequest
     {
         return [
             'name.required' => 'The name of the kitchen is required.',
-            'name.max'      => 'The name must not exceed 100 characters..',
+            'name.max' => 'The name must not exceed 100 characters..',
         ];
     }
 }
