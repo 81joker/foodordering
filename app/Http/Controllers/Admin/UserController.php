@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
 
 class UserController extends Controller
@@ -25,11 +25,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users',
-            'phone'    => 'nullable|max:20',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'phone' => 'nullable|max:20',
             'birthday' => 'nullable|date',
-            'role'     => 'required|in:customer,admin',
+            'role' => 'required|in:customer,admin',
             'password' => 'required|min:6',
         ]);
         $data = $request->all();
