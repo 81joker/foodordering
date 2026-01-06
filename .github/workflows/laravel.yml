@@ -60,6 +60,7 @@ jobs:
 
       # --- Deploy to Production  ---#
       - name: Deploy Backend using ssh
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -67,6 +68,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
+          timeout: 60s
           script: |
             set -e
 
