@@ -41,7 +41,7 @@ class FoodController extends Controller
         $food = Food::create($request->validated());
 
         // Créer dossier images
-        $folder = public_path('images/foods/' . $food->id);
+        $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
@@ -58,7 +58,6 @@ class FoodController extends Controller
 
             $image->move($folder, '1.jpg');
         }
-
 
         return redirect()
             ->route('admin.foods.index')
@@ -83,20 +82,19 @@ class FoodController extends Controller
     {
         $food->update($request->validated());
 
-        $folder = public_path('images/foods/' . $food->id);
+        $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
 
         // Si de nouvelles images sont envoyées, supprimer les anciennes
         if ($request->hasFile('images')) {
-            $oldFiles = glob($folder . '/*');
+            $oldFiles = glob($folder.'/*');
             foreach ($oldFiles as $file) {
                 if (is_file($file)) {
                     unlink($file);
                 }
             }
-
 
             // TODO: change this function to handle multiple images good before to ripped
             // foreach ($request->file('images') as $image) {
@@ -120,10 +118,10 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        $folder = public_path('images/foods/' . $food->id);
+        $folder = public_path('images/foods/'.$food->id);
 
         if (file_exists($folder)) {
-            $files = glob($folder . '/*');
+            $files = glob($folder.'/*');
             foreach ($files as $file) {
                 if (is_file($file)) {
                     unlink($file);
