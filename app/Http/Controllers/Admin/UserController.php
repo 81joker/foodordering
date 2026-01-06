@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Request;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -22,22 +25,48 @@ class UserController extends Controller
         return view('admin.pages.user.add');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'phone' => 'nullable|max:20',
-            'birthday' => 'nullable|date',
-            'role' => 'required|in:customer,admin',
-            'password' => 'required|min:6',
-        ]);
-        $data = $request->all();
-        if ($request->birthday) {
-            $data['birthday'] = Carbon::parse($request->birthday)->format('Y-m-d');
+
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+        if (isset($data['birthday']) && $data['birthday']) {
+            $data['birthday'] = Carbon::parse($data['birthday'])->format('Y-m-d');
         }
         User::create($data);
 
-        return redirect()->route('admin.users.index')->with('success', 'User créé');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
+    }
+
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $data = $request->validated();
+
+        if (empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        $user->update($data);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', 'User updated successfully');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.pages.user.update', compact('user'));
+    }
+
+
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return back()->with('success', 'User supprimé');
     }
 }
