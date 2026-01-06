@@ -73,5 +73,5 @@ jobs:
             set -e
 
             cd ${{ secrets.APP_PATH }} || { echo "Path not found: ${{ secrets.APP_PATH }}"; exit 1; }
-            bash backend/deploy.sh
+            bash deploy.sh
             echo "Backend deployed successfully"
