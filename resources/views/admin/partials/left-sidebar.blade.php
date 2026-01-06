@@ -29,12 +29,13 @@
                         <span class="mtext">Foods</span>
                     </a>
                 </li>
-                {{-- <li>
+                <li>
                     <a href="{{ route('admin.restaurants.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-shop"></span>
                         <span class="mtext">Restaurants</span>
                     </a>
                 </li>
+                {{-- 
                 --}}
                 {{-- <li>
                     <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Cuisine;
 use App\Http\Requests\CuisineRequest;
+use App\Models\Cuisine;
 
 class CuisineController extends Controller
 {
@@ -36,7 +35,6 @@ class CuisineController extends Controller
             ->route('admin.cuisines.index')
             ->with('success', 'Kitchen added successfully.');
     }
-
 
     public function edit(Cuisine $cuisine)
     {

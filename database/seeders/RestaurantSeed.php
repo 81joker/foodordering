@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CuisineSeed extends Seeder
+class RestaurantSeed extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        \App\Models\Cuisine::factory()->count(10)->create();
+        \App\Models\Restaurant::factory()->count(10)->create();
     }
 }

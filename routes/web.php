@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\FoodController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CuisineController;
+use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.layouts.app');
@@ -24,4 +25,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('foods', FoodController::class);
     Route::resource('cuisines', CuisineController::class);
+    Route::resource('restaurants', RestaurantController::class);
 });
