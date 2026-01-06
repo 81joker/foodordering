@@ -27,7 +27,7 @@ class CuisineFactory extends Factory
                 'Mediterranean',
                 'Thai',
                 'Spanish',
-                'Greek'
+                'Greek',
             ]),
         ];
     }

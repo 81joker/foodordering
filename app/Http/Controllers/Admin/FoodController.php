@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\FoodRequest;
+use App\Models\Cuisine;
 use App\Models\Food;
 use App\Models\Restaurant;
-use App\Models\Cuisine;
-use App\Http\Requests\FoodRequest;
 use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
@@ -19,6 +18,7 @@ class FoodController extends Controller
     {
         // On charge les relations pour afficher les noms dans le tableau
         $foods = Food::with(['restaurant', 'cuisine'])->latest()->paginate(10);
+
         return view('admin.pages.food.index', compact('foods'));
     }
 
@@ -29,6 +29,7 @@ class FoodController extends Controller
     {
         $restaurants = Restaurant::all();
         $cuisines = Cuisine::all();
+
         return view('admin.pages.food.add', compact('restaurants', 'cuisines'));
     }
 
@@ -40,8 +41,8 @@ class FoodController extends Controller
         $food = Food::create($request->validated());
 
         // Créer dossier images
-        $folder = public_path("images/foods/" . $food->id);
-        if (!file_exists($folder)) {
+        $folder = public_path('images/foods/'.$food->id);
+        if (! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
 
@@ -65,6 +66,7 @@ class FoodController extends Controller
     {
         $restaurants = Restaurant::all();
         $cuisines = Cuisine::all();
+
         return view('admin.pages.food.update', compact('food', 'restaurants', 'cuisines'));
     }
 
@@ -75,36 +77,44 @@ class FoodController extends Controller
     {
         $food->update($request->validated());
 
-        $folder = public_path("images/foods/" . $food->id);
-        if (!file_exists($folder)) mkdir($folder, 0777, true);
+        $folder = public_path('images/foods/'.$food->id);
+        if (! file_exists($folder)) {
+            mkdir($folder, 0777, true);
+        }
 
         // Si de nouvelles images sont envoyées, supprimer les anciennes
         if ($request->hasFile('images')) {
-            $oldFiles = glob($folder . '/*');
+            $oldFiles = glob($folder.'/*');
             foreach ($oldFiles as $file) {
-                if (is_file($file)) unlink($file);
+                if (is_file($file)) {
+                    unlink($file);
+                }
             }
 
             foreach ($request->file('images') as $image) {
-                $fileName =  $image->getClientOriginalName();
+                $fileName = $image->getClientOriginalName();
                 $image->move($folder, $fileName);
             }
         }
+
         return redirect()
             ->route('admin.foods.index')
             ->with('success', 'Food updated successfully.');
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Food $food)
     {
-        $folder = public_path("images/foods/" . $food->id);
+        $folder = public_path('images/foods/'.$food->id);
 
         if (file_exists($folder)) {
-            $files = glob($folder . '/*');
+            $files = glob($folder.'/*');
             foreach ($files as $file) {
-                if (is_file($file)) unlink($file);
+                if (is_file($file)) {
+                    unlink($file);
+                }
             }
             rmdir($folder);
         }

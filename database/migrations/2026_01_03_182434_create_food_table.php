@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
-            $table->foreignId('cuisine_id')->constrained()->onDelete('cascade');
+            $table->foreignId('restaurant_id')
+                ->constrained('restaurants')
+                ->onDelete('cascade');
+            $table->foreignId('cuisine_id')
+                ->nullable()
+                ->constrained('cuisines')
+                ->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 8, 2);
-            $table->decimal('avg_rating', 3, 2)->default(0);
+            $table->decimal('price', 10, 2);
+            $table->decimal('avg_rating', 3, 2)->default(0.00);
             $table->integer('total_orders')->default(0);
             $table->boolean('is_available')->default(true);
+            $table->json('images')->nullable();
             $table->timestamps();
         });
     }

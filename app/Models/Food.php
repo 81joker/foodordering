@@ -19,6 +19,11 @@ class Food extends Model
         'avg_rating',
         'total_orders',
         'is_available',
+        'images',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function restaurant()
