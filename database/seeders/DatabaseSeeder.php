@@ -21,5 +21,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            // CuisineSeed::class,
+            // RestaurantSeed::class,
+            FoodSeed::class,
+            // OrderSeed::class,
+            // ReviewSeed::class,
+        ]);
     }
 }
