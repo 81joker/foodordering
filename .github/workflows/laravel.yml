@@ -57,10 +57,12 @@ jobs:
       #     verbose: true
       #     flags: unittests
       #     name: codecov-umbrella-laravel-foor-ordering
-
-      # --- Deploy to Production  ---#
-      - name: Deploy Backend using ssh
-        uses: appleboy/ssh-action@v1.1.0
+  deploy:
+    needs: laravel-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -70,6 +72,6 @@ jobs:
           script: |
             set -e
 
-            cd ${{ secrets.APP_PATH }}
-            composer install --no-dev --prefer-dist --no-interaction
-            php artisan optimize:clear
+            cd ${{ secrets.APP_PATH }} || { echo "Path not found: ${{ secrets.APP_PATH }}"; exit 1; }
+            bash backend/deploy.sh
+            echo "Backend deployed successfully"
