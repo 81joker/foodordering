@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Tim',
+            'email' => 'tim26618@gmail.com',
+            'role' => 'admin',
+        ]);
 
         $this->call([
             CuisineSeed::class,

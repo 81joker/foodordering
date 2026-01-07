@@ -16,10 +16,17 @@
                     <span class="user-icon">
                         <img src="{{ asset('admin/vendors/images/photo1.jpg') }}" alt="" />
                     </span>
-                    <span class="user-name">Exmample name</span> </a>
+                    <span class="user-name">
+                        @if (Auth::check())
+                            {{ Auth::user()->name }}
+                        @else
+                            Guest
+                        @endif
+                    </span>
+                </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="#"><i class="dw dw-user1"></i> Profile</a>
-                    <form action="#" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="dropdown-item"><i class="dw dw-logout"></i> Log Out</button>
                     </form>

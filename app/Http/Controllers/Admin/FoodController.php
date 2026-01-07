@@ -16,7 +16,6 @@ class FoodController extends Controller
      */
     public function index()
     {
-        // On charge les relations pour afficher les noms dans le tableau
         $foods = Food::with(['restaurant', 'cuisine'])->latest()->paginate(10);
 
         return view('admin.pages.food.index', compact('foods'));
