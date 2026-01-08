@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::factory()->create([
+            'name' => 'Laura',
+            'email' => 'laura@gmail.com',
+        ]);
+
         $this->call([
             CuisineSeed::class,
             RestaurantSeed::class,
