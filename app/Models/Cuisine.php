@@ -13,7 +13,7 @@ class Cuisine extends Model
 
     public function restaurants()
     {
-        return $this->hasMany(Restaurant::class);
+        return $this->belongsToMany(Restaurant::class, 'cuisine_restaurant');
     }
 
     public function foods()

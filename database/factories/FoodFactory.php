@@ -19,7 +19,7 @@ class FoodFactory extends Factory
         return [
             'restaurant_id' => \App\Models\Restaurant::factory(),
             'cuisine_id' => \App\Models\Cuisine::factory(),
-            'name' => $this->faker->word(),
+            'name' => fake()->company().' Restaurant',
             'description' => $this->faker->sentence(),
             'price' => $this->faker->randomFloat(2, 5, 100),
             'avg_rating' => $this->faker->randomFloat(2, 1, 5),

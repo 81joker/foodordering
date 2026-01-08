@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('address');
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();
             $table->decimal('delivery_fee', 8, 2)->nullable();
             $table->decimal('avg_rating', 3, 2)->default(0);
             $table->timestamps();
