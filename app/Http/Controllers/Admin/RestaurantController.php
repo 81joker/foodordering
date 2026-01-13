@@ -63,11 +63,15 @@ class RestaurantController extends Controller
             foreach ($request->file('images') as $image) {
 
                 // récupérer le nom original fourni par ton input
-                $imageName = $image->getClientOriginalName();
-                // exemple : 1.jpg, 3.png, photo.jpeg
+                // $imageName = $image->getClientOriginalName();
+                // // exemple : 1.jpg, 3.png, photo.jpeg
 
-                // déplacer dans le dossier final
-                $image->move($folderPath, $imageName);
+                // // déplacer dans le dossier final
+                // $image->move($folderPath, $imageName);
+
+                $image = $request->file('images')[0];
+
+                $image->move($folderPath, 'logo.png');
             }
         }
 
