@@ -13,21 +13,20 @@ class CartController extends Controller
     {
         $food = Food::findOrFail($request->food_id);
 
-        // Récupérer panier session
         $cart = session()->get('cart', []);
 
         if (! empty($cart)) {
-            $first = reset($cart); // premier item du panier
+            $first = reset($cart); // get first item
 
             if ($first['restaurant_id'] != $food->restaurant_id) {
                 return back()->with('error', 'You can only order from one restaurant at a time.');
             }
         }
-        // si déjà dans le panier
+
         if (isset($cart[$food->id])) {
             $cart[$food->id]['quantity'] += $request->quantity;
         } else {
-            // sinon ajout
+            // otherwise add
             $cart[$food->id] = [
                 'id' => $food->id,
                 'name' => $food->name,
@@ -38,7 +37,7 @@ class CartController extends Controller
             ];
         }
 
-        // sauvegarde session
+        // save session
         session()->put('cart', $cart);
 
         return redirect()->route('checkout.index');

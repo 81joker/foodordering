@@ -22,24 +22,42 @@
                                         <div class="restaurant-detail-info">
                                             <div class="restaurant-detail-thumb">
                                                 <ul class="restaurant-detail-img-carousel">
-                                                    <li><img src="{{ asset("images/foods/{$food->id}/b1.jpg") }}"
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img1.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-1.jpg" itemprop="image">
+                                                    </li>
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img2.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-2.jpg" itemprop="image">
+                                                    </li>
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img3.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-3.jpg" itemprop="image">
+                                                    </li>
+                                                    {{-- <li><img src="{{ asset("images/foods/{$food->id}/b1.jpg") }}"
                                                             alt="restaurant-detail-big-img1-1.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/b2.jpg") }}"
                                                             alt="restaurant-detail-big-img1-2.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/b3.jpg") }}"
                                                             alt="restaurant-detail-big-img1-3.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/b4.jpg") }}"
-                                                            alt="restaurant-detail-big-img1-4.jpg" itemprop="image"></li>
+                                                            alt="restaurant-detail-big-img1-4.jpg" itemprop="image"></li> --}}
                                                 </ul>
                                                 <ul class="restaurant-detail-thumb-carousel">
-                                                    <li><img src="{{ asset("images/foods/{$food->id}/s1.jpg") }}"
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img1.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-1.jpg" itemprop="image">
+                                                    </li>
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img2.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-2.jpg" itemprop="image">
+                                                    </li>
+                                                    <li><img src="{{ asset('images/restaurants/slider/blog-detial-gallery-img3.jpg') }}"
+                                                            alt="restaurant-detail-big-img1-3.jpg" itemprop="image">
+                                                    </li>
+                                                    {{-- <li><img src="{{ asset("images/foods/{$food->id}/s1.jpg") }}"
                                                             alt="restaurant-detail-small-img1-1.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/s2.jpg") }}"
                                                             alt="restaurant-detail-small-img1-2.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/s3.jpg") }}"
                                                             alt="restaurant-detail-small-img1-3.jpg" itemprop="image"></li>
                                                     <li><img src="{{ asset("images/foods/{$food->id}/s4.jpg") }}"
-                                                            alt="restaurant-detail-small-img1-4.jpg" itemprop="image"></li>
+                                                            alt="restaurant-detail-small-img1-4.jpg" itemprop="image"></li> --}}
                                                 </ul>
                                             </div>
                                             <div class="restaurant-detail-title">
