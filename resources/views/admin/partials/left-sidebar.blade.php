@@ -1,8 +1,8 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="{{ route('admin.dashboard') }}"> <img src="{{ asset('admin/vendors/images/deskapp-logo.svg') }}"
-                alt="" class="dark-logo" />
-            <img src="{{ asset('admin/vendors/images/deskapp-logo-white.svg') }}" alt="" class="light-logo" />
+        <a href="{{ route('admin.dashboard') }}"> <img src="{{ asset('vendors/images/deskapp-logo.svg') }}" alt=""
+                class="dark-logo" />
+            <img src="{{ asset('vendors/images/deskapp-logo-white.svg') }}" alt="" class="light-logo" />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -18,9 +18,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-tag"></span>
-                        <span class="mtext">Cuisines</span>
+                    <a href="{{ route('admin.restaurants.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-shop"></span>
+                        <span class="mtext">Restaurants</span>
                     </a>
                 </li>
                 <li>
@@ -30,14 +30,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.restaurants.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-shop"></span>
-                        <span class="mtext">Restaurants</span>
-                    </a>
-                </li>
-                {{-- 
-                --}}
-                {{-- <li>
                     <a href="{{ route('admin.cuisines.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-tag"></span>
                         <span class="mtext">Cuisines</span>
@@ -60,7 +52,7 @@
                         <span class="micon bi bi-star"></span>
                         <span class="mtext">Reviews</span>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </div>
