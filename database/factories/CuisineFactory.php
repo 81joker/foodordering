@@ -17,7 +17,7 @@ class CuisineFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->randomElement([
+            'name' => $this->faker->unique()->randomElement([
                 'Italian',
                 'Chinese',
                 'Mexican',

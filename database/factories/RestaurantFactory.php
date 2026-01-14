@@ -16,14 +16,59 @@ class RestaurantFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => $this->faker->company(),
-            'description' => $this->faker->paragraph(),
-            'address' => $this->faker->address(),
-            // 'phone_number' => $this->faker->phoneNumber(),
-            'delivery_fee' => $this->faker->randomFloat(2, 0, 20),
-            'avg_rating' => $this->faker->randomFloat(2, 1, 5),
+        // Real restaurant names in Floridsdorf, Vienna
+        $floridsdorfRestaurants = [
+            'Gasthaus Zum Goldenen Löwen',
+            'Wirtshaus Stammersdorf',
+            'Gasthof Zur Linde',
+            'Restaurant Donauhof',
+            'Gasthaus Zum Grünen Baum',
+            'Wirtshaus Am Spitz',
+            'Gasthaus Floridsdorf',
+            'Pizzeria Da Vinci Floridsdorf',
+            'China Restaurant Peking',
+            'Thai Orchid Floridsdorf',
+            'Indisches Restaurant Maharaja',
+            'Café Central Floridsdorf',
+            'Steakhaus Floridsdorf',
+            'Fischrestaurant Donau',
+            'Heuriger Stammersdorf',
+            'Burger King Floridsdorf',
+            'McDonald\'s Donauzentrum',
+            'Vegetarisches Restaurant Grünes Herz',
+            'Schnitzelhaus Floridsdorf',
+            'Kebab Haus Floridsdorf',
+            'Asia Wok Floridsdorf',
+            'Bäckerei-Konditorei Felber',
+            'Café Donau',
+            'Weingut Floridsdorf',
+        ];
 
+        // Floridsdorf streets
+        $floridsdorfStreets = [
+            'Prager Straße',
+            'Brünner Straße',
+            'Wagramer Straße',
+            'Angerer Straße',
+            'Jedlersdorfer Straße',
+            'Donaufelder Straße',
+            'Floridsdorfer Markt',
+            'Schwarzeneggerstraße',
+            'Gerasdorfer Straße',
+            'Stammersdorfer Straße',
+        ];
+
+        $street = $this->faker->randomElement($floridsdorfStreets);
+        $houseNumber = $this->faker->numberBetween(1, 150);
+        $fullAddress = $street . ' ' . $houseNumber . ', 1210 Floridsdorf, Wien, Österreich';
+
+        return [
+            'name' => $this->faker->unique()->randomElement($floridsdorfRestaurants),
+            'description' => $this->faker->paragraph(),
+            'address' => $fullAddress,
+            'phone_number' => '+43 1 ' . $this->faker->numberBetween(1000000, 9999999),
+            'delivery_fee' => $this->faker->randomFloat(2, 0, 5),
+            'avg_rating' => $this->faker->randomFloat(2, 3.0, 5.0),
         ];
     }
 }
