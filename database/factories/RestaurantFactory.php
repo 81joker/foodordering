@@ -60,13 +60,13 @@ class RestaurantFactory extends Factory
 
         $street = $this->faker->randomElement($floridsdorfStreets);
         $houseNumber = $this->faker->numberBetween(1, 150);
-        $fullAddress = $street . ' ' . $houseNumber . ', 1210 Floridsdorf, Wien, Österreich';
+        $fullAddress = $street.' '.$houseNumber.', 1210 Floridsdorf, Wien, Österreich';
 
         return [
             'name' => $this->faker->unique()->randomElement($floridsdorfRestaurants),
             'description' => $this->faker->paragraph(),
             'address' => $fullAddress,
-            'phone_number' => '+43 1 ' . $this->faker->numberBetween(1000000, 9999999),
+            'phone_number' => '+43 1 '.$this->faker->numberBetween(1000000, 9999999),
             'delivery_fee' => $this->faker->randomFloat(2, 0, 5),
             'avg_rating' => $this->faker->randomFloat(2, 3.0, 5.0),
         ];

@@ -11,15 +11,17 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('user', 'restaurant')->latest()->paginate(20);
+
         return view('admin.pages.orders.index', compact('orders'));
     }
 
     public function orderLines(Order $order)
     {
         $lines = $order->items()->with('food')->get();
+
         return response()->json([
             'order' => $order,
-            'lines' => $lines
+            'lines' => $lines,
         ]);
     }
 
@@ -28,7 +30,7 @@ class OrderController extends Controller
         $request->validate(['order_status' => 'required']);
 
         $order->update([
-            'order_status' => $request->order_status
+            'order_status' => $request->order_status,
         ]);
 
         return response()->json(['success' => true]);
@@ -37,6 +39,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
+
         return redirect()
             ->route('admin.orders.index')
             ->with('success', 'Order supprimée avec succès.');

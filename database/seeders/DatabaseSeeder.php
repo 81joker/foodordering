@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CuisineSeed::class,
             RestaurantSeed::class,
-            // FoodSeed::class,
+            FoodSeed::class,
             // OrderSeed::class,
             // ReviewSeed::class,
         ]);

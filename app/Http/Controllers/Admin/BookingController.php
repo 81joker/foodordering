@@ -13,6 +13,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with('restaurant')->latest()->get();
+
         return view('admin.pages.booking.index', compact('bookings'));
     }
 
@@ -36,7 +37,7 @@ class BookingController extends Controller
             'number_of_people' => 'required|integer|min:1',
             'status' => 'required|in:pending,confirmed,cancelled,completed',
         ]);
-        $validated['booking_date'] =Carbon::parse($request->booking_date)->format('Y-m-d');
+        $validated['booking_date'] = Carbon::parse($request->booking_date)->format('Y-m-d');
         $validated['booking_time'] = Carbon::parse($request->booking_time)->format('H:i:s');
         Booking::findOrFail($id)->update($validated);
 
@@ -46,6 +47,7 @@ class BookingController extends Controller
     public function destroy($id)
     {
         Booking::findOrFail($id)->delete();
+
         return redirect()->route('admin.bookings.index')->with('success', 'Booking deleted successfully');
     }
 }
