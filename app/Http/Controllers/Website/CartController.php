@@ -12,7 +12,6 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $food = Food::findOrFail($request->food_id);
-
         $cart = session()->get('cart', []);
 
         if (! empty($cart)) {
