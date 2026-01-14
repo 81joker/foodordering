@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('delivery_fee', 10, 2);
             $table->decimal('tax', 10, 2);
             $table->decimal('total', 10, 2);
-            $table->enum('payment_method', ['credit_card', 'paypal', 'cash_on_delivery']);
+            $table->enum('payment_method', ['cash', 'online'])->default('cash');
             $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->timestamps();
         });

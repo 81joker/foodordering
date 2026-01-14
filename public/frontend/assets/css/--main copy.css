@@ -6811,8 +6811,7 @@ i.off {
     font-family: Poppins;
     font-weight: 700;
 }
-.restaurant-detail-title > a,
-.brd-rd3 {
+.restaurant-detail-title > a {
     display: inline-block;
     padding: 10px 28.5px;
     font-size: 12px;
@@ -6821,8 +6820,7 @@ i.off {
     vertical-align: middle;
     margin-top: 30px;
 }
-.restaurant-detail-title > p,
-[itemprop="description"] {
+.restaurant-detail-title > p {
     margin: 20px 0 0;
     line-height: 28px;
 }
@@ -7755,64 +7753,3 @@ a.thanks-close:focus {
 .about-feat.text-center > img {
     width: 100%;
 }
-
-ul > li.active {
-    color: #d32f2f !important;
-    font-weight: bold !important;
-}
-
-.brd-rd3:hover {
-    background-color: #ea1b25;
-}
-
-/* ===== Checkout Order Fix ===== */
-
-/* .li-order-list {
-    display: flex;
-    align-items: flex-start;
-    padding: 15px 0;
-}
-.order-list-name,
-.order-list-ut,
-.qty-wrap,
-.order-list-price,
-.order-list-btn {
-    line-height: 1;
-    margin-top: 6px;
-}
-
-.qty-wrap .input-group {
-    display: flex;
-    align-items: center;
-    width: auto;
-} */
-/* .order-list-name {
-    flex: 2;
-}
-
-.order-list-ut {
-    flex: 1;
-    text-align: center;
-}
-
-.qty-wrap {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-
-.qty-wrap .input-group-btn {
-    width: auto;
-    display: flex;
-}
-
-.order-list-price {
-    flex: 1;
-    text-align: right;
-}
-
-.order-list-btn {
-    width: 40px;
-    text-align: right;
-} */

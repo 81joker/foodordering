@@ -34,12 +34,12 @@ class CheckoutController extends Controller
         // 1. GET OR CREATE CUSTOMER
         // -----------------------------------------
         $customer = User::where('phone', $request->phone)->first();
-
         if (! $customer) {
             $customer = User::create([
                 'name' => $request->name,
+                'email' => $request->email ?? 'customer@gmail.com',
                 'phone' => $request->phone,
-                'password' => bcrypt('123456'), // random or default password
+                'password' => bcrypt('password'), // random or default password
                 'role' => 'customer',
             ]);
         }
@@ -58,7 +58,6 @@ class CheckoutController extends Controller
         $tax = $subtotal * 0.03;
         $delivery_fee = 10; // set your fee
         $total = $subtotal + $tax + $delivery_fee;
-
         // -----------------------------------------
         // 3. CREATE ORDER
         // -----------------------------------------

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -11,11 +13,14 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'total_amount',
-        'status',
-        'delivery_address',
-        'placed_at',
-        'delivered_at',
+        'restaurant_id',
+        'order_status',
+        'subtotal',
+        'delivery_fee',
+        'tax',
+        'total',
+        'payment_method',
+        'payment_status',
     ];
 
     public function user()
@@ -23,12 +28,12 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function restaurant()
+    public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
     }
 
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
