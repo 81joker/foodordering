@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @if($errors->has('email') || $errors->has('password') || request()->query('login')) class="log-popup-active" @endif>
 
 <head>
     <meta charset="UTF-8">
@@ -259,14 +259,22 @@
                                 class="fa fa-twitter"></i> Twitter</a>
                     </div>
                     <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form" method="GET" action="{{ route('login') }}">
+                    <form class="sign-form" method="POST" action="{{ route('login.post') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" name="name"
-                                    placeholder="Username or Email">
+                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
+                                    placeholder="Email" required autocomplete="email">
+                                @error('email')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" name="password" placeholder="Password">
+                                <input class="brd-rd3" type="password" name="password" placeholder="Password" required
+                                    autocomplete="current-password">
+                                @error('password')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
