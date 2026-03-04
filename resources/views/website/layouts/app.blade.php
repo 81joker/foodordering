@@ -42,6 +42,10 @@
         <header class="stick">
             <div class="topbar">
                 <div class="container">
+                    <div class="topbar-register">
+                        <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a
+                            class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
+                    </div>
                     <div class="social1">
                         <a href="#" title="Facebook" itemprop="url" target="_blank"><i
                                 class="fa fa-facebook-square"></i></a>
