@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" @if($errors->has('email') || $errors->has('password') || request()->query('login')) class="log-popup-active" @endif>
+<html lang="en" @if(request()->query('register') || $errors->has('name')) class="sign-popup-active" @elseif($errors->has('email') || $errors->has('password') || request()->query('login')) class="log-popup-active" @endif>
 
 <head>
     <meta charset="UTF-8">
@@ -280,7 +280,7 @@
                                 <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Not a member? Sign
+                                <a class="sign-btn" href="{{ url()->current() }}?register=1" title="" itemprop="url">Not a member? Sign
                                     up</a>
                                 <a class="recover-btn" href="#" title="" itemprop="url">Recover my
                                     password</a>
@@ -309,22 +309,39 @@
                                 class="fa fa-twitter"></i> Twitter</a>
                     </div>
                     <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form">
+                    <form class="sign-form" method="POST" action="{{ route('register.post') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" placeholder="Username">
+                                <input class="brd-rd3" type="text" name="name" value="{{ old('name') }}"
+                                    placeholder="Name" required autocomplete="name">
+                                @error('name')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="email" placeholder="Email">
+                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
+                                    placeholder="Email" required autocomplete="email">
+                                @error('email')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" placeholder="Password">
+                                <input class="brd-rd3" type="password" name="password" placeholder="Password" required
+                                    autocomplete="new-password">
+                                @error('password')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="password" name="password_confirmation" placeholder="Confirm Password" required
+                                    autocomplete="new-password">
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Already Registered?
+                                <a class="sign-btn" href="{{ url()->current() }}?login=1" title="" itemprop="url">Already Registered?
                                     Sign in</a>
                                 <a class="recover-btn" href="#" title="" itemprop="url">Recover my
                                     password</a>
