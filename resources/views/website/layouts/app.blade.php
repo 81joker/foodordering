@@ -8,7 +8,6 @@
     <meta name="keywords" content="@yield('meta_keywords', 'food, ordering, template, restaurant')" />
     <title>@yield('title', 'Food Ordering HTML Template')</title>
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/x-icon">
-
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
