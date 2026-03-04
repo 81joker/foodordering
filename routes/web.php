@@ -43,7 +43,7 @@ Route::group([], function () {
 });
 
 Route::middleware(IsAdmin::class)->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('restaurants', AdminRestaurantController::class);
     Route::resource('foods', AdminFoodController::class);
     Route::resource('cuisines', AdminCuisineController::class);

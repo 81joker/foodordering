@@ -9,18 +9,17 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        // VERIFICATION : Si l'utilisateur est DÉJÀ connecté
         if (Auth::check()) {
             $user = Auth::user();
 
-            // Si c'est un admin -> Direction Dashboard
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
+            } elseif ($user->role === 'customer') {
+                return redirect()->route('home');
             } else {
                 Auth::logout();
             }
 
-            // Si c'est un user normal -> Direction Accueil (ou autre page)
             return redirect('/');
         }
 
@@ -34,11 +33,14 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (auth()->attempt($credentials)) {
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return view('admin.dashboard.index');
-            // return redirect()->route('admin.dashboard');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
