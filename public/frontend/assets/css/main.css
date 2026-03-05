@@ -99,6 +99,11 @@ ol li {
     font-family: "Poppins";
 }
 
+.z-index-3 {
+    position: relative;
+    z-index: 2000 !important;
+}
+
 a,
 a:hover,
 a:focus,
@@ -5867,7 +5872,7 @@ input:checked + .switch-slider:before {
 .log-popup,
 .sign-popup {
     position: fixed;
-    z-index: 999;
+    z-index: 9999 !important;
     top: 0;
     left: 0;
     bottom: 0;

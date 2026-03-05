@@ -2,11 +2,13 @@
 ### [Template Backend](https://github.com/dropways/deskapp)
 
 
-| الدالة     | ماذا تفعل          |
+
+| Function   |  What it does      |
 | ---------- | ------------------ |
-| `attach()` | يضيف فقط           |
-| `detach()` | يحذف فقط           |
-| `sync()`   | يحذف + يضيف + ينظف |
+| `attach()` |  Only adds         |
+| `detach()` |  Only removes     |
+| `sync()`   |  Removes + adds + cleans up |
+
 
 
 php artisan config:clear

@@ -285,21 +285,21 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
-                                    placeholder="Email" required autocomplete="email">
+                                <input class="brd-rd3 z-index-3" type="email" name="email"
+                                    value="{{ old('email') }}" placeholder="Email" required autocomplete="email">
                                 @error('email')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" name="password" placeholder="Password"
-                                    required autocomplete="current-password">
+                                <input class="brd-rd3 z-index-3" type="password" name="password"
+                                    placeholder="Password" required autocomplete="current-password">
                                 @error('password')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
+                                <button class="red-bg brd-rd3 z-index-3" type="submit">SIGN IN</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <a class="sign-btn" href="{{ url()->current() }}?register=1" title=""
@@ -337,39 +337,39 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" name="name" value="{{ old('name') }}"
-                                    placeholder="Name" required autocomplete="name">
+                                <input class="brd-rd3 z-index-3" type="text" name="name"
+                                    value="{{ old('name') }}" placeholder="Name" required autocomplete="name">
                                 @error('name')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
-                                    placeholder="Email" required autocomplete="email">
+                                <input class="brd-rd3 z-index-3" type="email" name="email"
+                                    value="{{ old('email') }}" placeholder="Email" required autocomplete="email">
                                 @error('email')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" name="password" placeholder="Password"
-                                    required autocomplete="new-password">
+                                <input class="brd-rd3 z-index-3" type="password" name="password"
+                                    placeholder="Password" required autocomplete="new-password">
                                 @error('password')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" name="password_confirmation"
+                                <input class="brd-rd3 z-index-3" type="password" name="password_confirmation"
                                     placeholder="Confirm Password" required autocomplete="new-password">
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
+                                <button class="red-bg brd-rd3 z-index-3" type="submit">REGISTER NOW</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="{{ url()->current() }}?login=1" title=""
+                                <a class="sign-btn z-index-3" href="{{ url()->current() }}?login=1" title=""
                                     itemprop="url">Already Registered?
                                     Sign in</a>
-                                <a class="recover-btn" href="#" title="" itemprop="url">Recover my
-                                    password</a>
+                                <a class="recover-btn z-index-3" href="#" title=""
+                                    itemprop="url">Recover my password</a>
                             </div>
                         </div>
                     </form>

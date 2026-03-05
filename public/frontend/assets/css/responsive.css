@@ -390,6 +390,19 @@
 	.remove-ext.margn-btm{margin-bottom: 0;}
 	.select-wrp .chosen-container-single .chosen-drop{width: 100%;}
 
+	/* Sign-in / Sign-up popup: smaller on tablet and mobile */
+	.log-popup .sign-popup-wrapper,
+	.sign-popup .sign-popup-wrapper { width: 100%; max-width: 92%; margin: 20px auto; padding: 15px; box-sizing: border-box; }
+	.log-popup .sign-popup-inner,
+	.sign-popup .sign-popup-inner { padding: 35px 25px 25px; box-sizing: border-box; }
+	.sign-popup-title > h4 { font-size: 24px; }
+	.sign-popup-title > span { font-size: 12px; }
+	.popup-social > a { padding: 6px 20px; font-size: 13px; margin: 2px; }
+	.popup-seprator { margin: 20px 0; }
+	.log-popup .sign-form input,
+	.sign-popup .sign-form input { height: 44px; padding: 8px 20px; font-size: 10px; margin-bottom: 8px; }
+	.log-popup .sign-form button,
+	.sign-popup .sign-form button { padding: 12px 20px; font-size: 12px; }
 }
 
 @media (min-width: 641px) and (max-width:736px){
@@ -557,9 +570,45 @@
 	.newsletter-popup-inner {max-width: 95%;padding: 60px 30px 40px;}
 	.newsletter-popup-inner > h3 {max-width: 65%;}
 	.newsletter-popup-inner > p {max-width: 100%;}
-	.log-popup .sign-popup-wrapper, 
-	.sign-popup .sign-popup-wrapper {max-width: 95%;}
-	.sign-popup-inner {padding: 60px 30px 40px;}
+	/* Sign-in / Sign-up popup: much smaller on small mobile */
+	.log-popup .sign-popup-wrapper,
+	.sign-popup .sign-popup-wrapper {
+		width: 100%;
+		max-width: 94%;
+		margin: 12px auto;
+		max-height: 88vh;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+	.log-popup .sign-popup-inner,
+	.sign-popup .sign-popup-inner {
+		padding: 18px 16px 16px;
+		max-height: calc(88vh - 24px);
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		overflow-x: hidden;
+	}
+	.log-close-btn,
+	.sign-close-btn { right: 12px; top: 12px; width: 22px; line-height: 22px; font-size: 10px; }
+	.sign-popup-title { margin-bottom: 14px; }
+	.sign-popup-title > h4 { font-size: 20px; }
+	.sign-popup-title > span { font-size: 11px; }
+	.popup-social > a { padding: 6px 14px; font-size: 12px; margin: 2px; }
+	.popup-seprator { margin: 14px 0; }
+	.log-popup .sign-form input,
+	.sign-popup .sign-form input {
+		height: 42px;
+		padding: 8px 16px;
+		margin-bottom: 6px;
+		font-size: 10px;
+		touch-action: manipulation;
+		-webkit-user-select: text;
+		user-select: text;
+	}
+	.log-popup .sign-form button,
+	.sign-popup .sign-form button { padding: 10px 16px; font-size: 11px; }
+	.log-popup .sign-form a,
+	.sign-popup .sign-form a { margin-top: 12px; font-size: 10px; }
 	.page-title-inner > h1 {font-size: 30px;}
 	.page-title-inner > span {font-size: 20px;}
 	.page-title-wrapper {padding-bottom: 0;}
@@ -631,7 +680,6 @@
 	.coming-soon-inner > p {font-size: 15px;line-height: 24px;}
 	.countdown > li {height: 100px;width: 100px;padding: 33px 20px;}
 	.upcoming-event .countdown > li span {font-size: 25px;}
-	.sign-popup-title > h4 {font-size: 28px;}
 	.loc-map {height: 250px;}
 	.contact-form-inner > form .row > div {float: left;width: 100%;}
 	.contact-form-inner > form input, 
