@@ -24,6 +24,18 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::get('/auth/google', [AuthController::class, 'google'])->name('auth.google');
+Route::get('/auth/google/callback', [AuthController::class, 'googleRedirect'])->name('auth.google.callback');
+Route::get('/sign-in/google/redirect', [AuthController::class, 'googleRedirect'])->name('auth.google.callback.alt');
+
+Route::get('/auth/facebook', [AuthController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('/auth/facebook/callback', [AuthController::class, 'handleFacebookCallback'])->name('auth.facebook.callback');
+
+Route::get('/auth/github', [AuthController::class, 'redirectToGitHub'])->name('auth.github');
+Route::get('/auth/github/callback', [AuthController::class, 'handleGitHubCallback'])->name('auth.github.callback');
+Route::get('/sign-in/github/redirect', [AuthController::class, 'handleGitHubCallback'])->name('auth.github.callback.alt');
+
 Route::group([], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -2,7 +2,7 @@ name: Laravel Foor Ordering
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main , develop"]
 
 jobs:
   laravel-tests:
