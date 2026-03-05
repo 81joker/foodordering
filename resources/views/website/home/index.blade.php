@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="block">
-            <div style="background-image: url(assets/images/topbg.jpg);" class="fixed-bg"></div>
+            <div style="background-image: url({{ asset('images/topbg.jpg') }})" class="fixed-bg"></div>
             <div class="restaurant-searching text-center">
                 <div class="restaurant-searching-inner">
                     <h2 itemprop="headline">Order <span>Food Online From</span> the Best Restaurants</h2>
