@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+    @if (request()->query('register') || $errors->has('name')) class="sign-popup-active" @elseif($errors->has('email') || $errors->has('password') || request()->query('login')) class="log-popup-active" @endif>
 
 <head>
     <meta charset="UTF-8">
@@ -42,6 +43,42 @@
         <header class="stick">
             <div class="topbar">
                 <div class="container">
+
+
+
+
+                    @if (Auth::check())
+                        <div class="topbar-register">
+
+                            <a href="#">
+                                <i class="fa fa-user"></i> {{ Auth::user()->name }}
+                            </a>
+                            |
+                            <a href="#" title="Register" itemprop="url"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                        {{-- <div class="topbar-left">
+                        <a href="#" title="" itemprop="url"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        <a href="#" title="" itemprop="url"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out"></i> Logout
+                        </a>
+                    </div> --}}
+                    @else
+                        <div class="topbar-register">
+                            <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a
+                                class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
+                        </div>
+                    @endif
+
+
+
                     <div class="social1">
                         <a href="#" title="Facebook" itemprop="url" target="_blank"><i
                                 class="fa fa-facebook-square"></i></a>
@@ -67,7 +104,8 @@
                                         itemprop="url">RESTAURANTS</a></li>
                                 <li><a href="{{ route('food.index') }}" title="FOODS" itemprop="url">FOODS</a></li>
                                 <li><a href="{{ route('checkout.index') }}" title="CHECKOUT"
-                                        itemprop="url">CHECKOUT</a></li>
+                                        itemprop="url">CHECKOUT</a>
+                                </li>
                                 <li><a href="{{ route('contact.index') }}" title="CONTACT" itemprop="url">CONTACT
                                         US</a></li>
                             </ul>
@@ -93,13 +131,31 @@
                     <ul>
                         <li><a href="{{ route('home') }}" title="HOME" itemprop="url">HOMEPAGES</a></li>
                         <li><a href="{{ route('restaurant.index') }}" title="RESTAURANTS"
-                                itemprop="url">RESTAURANTS</a></li>
+                                itemprop="url">RESTAURANTS</a>
+                        </li>
                         <li><a href="{{ route('food.index') }}" title="FOODS" itemprop="url">FOODS</a></li>
                         <li><a href="{{ route('checkout.index') }}" title="CHECKOUT" itemprop="url">CHECKOUT</a>
                         </li>
                         <li><a href="{{ route('contact.index') }}" title="CONTACT" itemprop="url">CONTACT US</a>
                         </li>
                     </ul>
+                </div>
+                <div class="topbar-register">
+                    @if (Auth::check())
+                        <a href="#">
+                            <i class="fa fa-user"></i> {{ Auth::user()->name }}
+                        </a>
+                        |
+                        <a href="#" title="Register" itemprop="url"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                        </form>
+                    @else
+                        <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a
+                            class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
+                    @endif
                 </div>
                 <div class="social1">
                     <a href="#" title="Facebook" itemprop="url" target="_blank"><i
@@ -212,28 +268,42 @@
                         <h4 itemprop="headline">SIGN IN</h4>
                         <span>with your social network</span>
                     </div>
+                    @if (session('error'))
+                        <div class="alert alert-danger text-center small">{{ session('error') }}</div>
+                    @endif
+                    {{-- Social login: works when deployed online; on localhost redirect URIs may need to match .env --}}
                     <div class="popup-social text-center">
-                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url"
-                            target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
-                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url"
-                            target="_blank"><i class="fa fa-google-plus"></i> Google</a>
-                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i
-                                class="fa fa-twitter"></i> Twitter</a>
+                        <a class="facebook brd-rd3" href="{{ route('auth.facebook') }}" title="Facebook"
+                            itemprop="url"><i class="fa fa-facebook"></i> Facebook</a>
+                        <a class="google brd-rd3" href="{{ route('auth.google') }}" title="Google"
+                            itemprop="url"><i class="fa fa-google-plus"></i> Google</a>
+                        <a class="twitter brd-rd3" href="{{ route('auth.github') }}" title="GitHub"
+                            itemprop="url"><i class="fa fa-github"></i> GitHub</a>
                     </div>
                     <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form">
+                    <form class="sign-form" method="POST" action="{{ route('login.post') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" placeholder="Username or Email">
+                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
+                                    placeholder="Email" required autocomplete="email">
+                                @error('email')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" placeholder="Password">
+                                <input class="brd-rd3" type="password" name="password" placeholder="Password"
+                                    required autocomplete="current-password">
+                                @error('password')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Not a member? Sign
+                                <a class="sign-btn" href="{{ url()->current() }}?register=1" title=""
+                                    itemprop="url">Not a member? Sign
                                     up</a>
                                 <a class="recover-btn" href="#" title="" itemprop="url">Recover my
                                     password</a>
@@ -253,31 +323,50 @@
                         <h4 itemprop="headline">SIGN UP</h4>
                         <span>with your social network</span>
                     </div>
+                    {{-- Social sign up: same as login; works when deployed online --}}
                     <div class="popup-social text-center">
-                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url"
-                            target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
-                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url"
-                            target="_blank"><i class="fa fa-google-plus"></i> Google</a>
-                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i
-                                class="fa fa-twitter"></i> Twitter</a>
+                        <a class="facebook brd-rd3" href="{{ route('auth.facebook') }}" title="Facebook"
+                            itemprop="url"><i class="fa fa-facebook"></i> Facebook</a>
+                        <a class="google brd-rd3" href="{{ route('auth.google') }}" title="Google"
+                            itemprop="url"><i class="fa fa-google-plus"></i> Google</a>
+                        <a class="twitter brd-rd3" href="{{ route('auth.github') }}" title="GitHub"
+                            itemprop="url"><i class="fa fa-github"></i> GitHub</a>
                     </div>
                     <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form">
+                    <form class="sign-form" method="POST" action="{{ route('register.post') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" placeholder="Username">
+                                <input class="brd-rd3" type="text" name="name" value="{{ old('name') }}"
+                                    placeholder="Name" required autocomplete="name">
+                                @error('name')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="email" placeholder="Email">
+                                <input class="brd-rd3" type="email" name="email" value="{{ old('email') }}"
+                                    placeholder="Email" required autocomplete="email">
+                                @error('email')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" placeholder="Password">
+                                <input class="brd-rd3" type="password" name="password" placeholder="Password"
+                                    required autocomplete="new-password">
+                                @error('password')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="password" name="password_confirmation"
+                                    placeholder="Confirm Password" required autocomplete="new-password">
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Already Registered?
+                                <a class="sign-btn" href="{{ url()->current() }}?login=1" title=""
+                                    itemprop="url">Already Registered?
                                     Sign in</a>
                                 <a class="recover-btn" href="#" title="" itemprop="url">Recover my
                                     password</a>
