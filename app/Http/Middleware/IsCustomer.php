@@ -22,6 +22,7 @@ class IsCustomer
             if ($user) {
                 Auth::logout();
             }
+
             return redirect()->route('login')
                 ->with('error', 'Access denied. Customer privileges required.');
         }

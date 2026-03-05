@@ -24,7 +24,6 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 Route::get('/auth/google', [AuthController::class, 'google'])->name('auth.google');
 Route::get('/auth/google/callback', [AuthController::class, 'googleRedirect'])->name('auth.google.callback');
 Route::get('/sign-in/google/redirect', [AuthController::class, 'googleRedirect'])->name('auth.google.callback.alt');

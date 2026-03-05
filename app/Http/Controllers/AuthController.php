@@ -36,6 +36,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('home');
         }
+
         return redirect()->route('home', ['register' => 1]);
     }
 
@@ -63,13 +64,13 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
+
             return redirect()->route('home');
         }
 
@@ -99,6 +100,7 @@ class AuthController extends Controller
             $socialUser = Socialite::driver('google')->user();
             $user = $this->findOrCreateSocialUser($socialUser->getEmail(), $socialUser->getName());
             Auth::login($user, true);
+
             return redirect()->route('home');
         } catch (\Throwable $e) {
             return redirect()->route('home', ['login' => 1])->with('error', 'Sign in with Google failed. Please try again.');
@@ -116,6 +118,7 @@ class AuthController extends Controller
             $socialUser = Socialite::driver('facebook')->user();
             $user = $this->findOrCreateSocialUser($socialUser->getEmail(), $socialUser->getName());
             Auth::login($user, true);
+
             return redirect()->route('home');
         } catch (\Throwable $e) {
             return redirect()->route('home', ['login' => 1])->with('error', 'Sign in with Facebook failed. Please try again.');
@@ -133,6 +136,7 @@ class AuthController extends Controller
             $socialUser = Socialite::driver('github')->user();
             $user = $this->findOrCreateSocialUser($socialUser->getEmail(), $socialUser->getNickname() ?: $socialUser->getName());
             Auth::login($user, true);
+
             return redirect()->route('home');
         } catch (\Throwable $e) {
             return redirect()->route('home', ['login' => 1])->with('error', 'Sign in with GitHub failed. Please try again.');
@@ -145,6 +149,7 @@ class AuthController extends Controller
             throw new \RuntimeException('Your account has no email.');
         }
         $name = $name ?: (explode('@', $email)[0] ?? 'User');
+
         return User::firstOrCreate(
             ['email' => $email],
             [

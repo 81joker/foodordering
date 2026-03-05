@@ -140,6 +140,23 @@
                         </li>
                     </ul>
                 </div>
+                <div class="topbar-register">
+                    @if (Auth::check())
+                        <a href="#">
+                            <i class="fa fa-user"></i> {{ Auth::user()->name }}
+                        </a>
+                        |
+                        <a href="#" title="Register" itemprop="url"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                        </form>
+                    @else
+                        <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a
+                            class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
+                    @endif
+                </div>
                 <div class="social1">
                     <a href="#" title="Facebook" itemprop="url" target="_blank"><i
                             class="fa fa-facebook-square"></i></a>
