@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cuisines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            // TODO:delete unique constraint after testing,@time 2026-01-03T18:21:31+00:00
             // $table->string('name')->unique();
             $table->timestamps();
         });

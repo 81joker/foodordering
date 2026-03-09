@@ -1,0 +1,12 @@
+Table restaurants {
+  id bigint [pk, increment]
+  name varchar
+  description text [null]
+  address varchar
+  phone_number varchar [null]
+  delivery_fee decimal(8,2) [null]
+  avg_rating decimal(3,2) [default: 0]
+
+  created_at timestamp
+  updated_at timestamp
+}

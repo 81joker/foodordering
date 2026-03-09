@@ -53,8 +53,13 @@ Route::group([], function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+
+    Route::post('/search', [RestaurantController::class, 'search'])->name('restaurant.search');
 });
 
+
+// Admin Dashboard routes
 Route::middleware(IsAdmin::class)->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('restaurants', AdminRestaurantController::class);

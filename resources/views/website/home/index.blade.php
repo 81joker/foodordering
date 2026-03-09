@@ -7,14 +7,15 @@
             <div class="restaurant-searching text-center">
                 <div class="restaurant-searching-inner">
                     <h2 itemprop="headline">Order <span>Food Online From</span> the Best Restaurants</h2>
-                    <form class="restaurant-search-form brd-rd2">
+                    <form class="restaurant-search-form brd-rd2" method="post" action="{{ route('restaurant.search') }}">
+                        @csrf
                         <div class="row mrg10">
                             <div class="col-md-6 col-sm-5 col-lg-5 col-xs-12">
-                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text"
+                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text" name="name"
                                         placeholder="Restaurant Name"></div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text"
+                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text" name="name"
                                         placeholder="Food Name"></div>
                             </div>
                             <div class="col-md-2 col-sm-3 col-lg-3 col-xs-12">
