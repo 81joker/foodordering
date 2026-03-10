@@ -32,7 +32,7 @@ class FoodFactory extends Factory
         return [
             'restaurant_id' => \App\Models\Restaurant::inRandomOrder()->first()->id ?? \App\Models\Restaurant::factory(),
             'cuisine_id' => \App\Models\Cuisine::inRandomOrder()->first()->id ?? \App\Models\Cuisine::factory(),
-            'name' => $dish[0],
+            'food_name' => $dish[0],
             'description' => $dish[1],
             'price' => $dish[2],
             'avg_rating' => $this->faker->randomFloat(2, 3.8, 4.9),

@@ -20,7 +20,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('cuisines')
                 ->onDelete('cascade');
-            $table->string('name');
+            $table->string('food_name');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
             $table->decimal('avg_rating', 3, 2)->default(0.00);

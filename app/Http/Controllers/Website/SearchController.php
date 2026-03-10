@@ -8,27 +8,27 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-   public function search(Request $request)
+    public function search(Request $request)
     {
 
-        dd($request->all());
-        $name = $request->input('name');
-        $food = $request->input('food');
+        $restaurant = $request->input('restaurant_name');
+        $food = $request->input('food_name');
 
         $query = Restaurant::query();
 
-        if ($name) {
-            $query->where('name', 'like', "%$name%");
+        if ($restaurant) {
+            $query->where('restaurant_name', 'like', "%$restaurant%");
         }
 
         if ($food) {
             $query->whereHas('foods', function ($q) use ($food) {
-                $q->where('name', 'like', "%$food%");
+                $q->where('food_name', 'like', "%$food%");
             });
         }
 
         $restaurants = $query->with('cuisines')->paginate(6);
-
-        return view('website.restaurant.index', compact('restaurants'));
-    }  
+        // dd($restaurant);
+        return view('website.home.search', compact('restaurants'));
+        // return view('website.restaurant.index', compact('restaurants'));
+    }
 }
