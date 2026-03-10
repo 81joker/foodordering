@@ -1,4 +1,6 @@
 @extends('website.layouts.app')
+@section('title', 'search')
+
 
 @section('content')
     <div class="responsive-header">

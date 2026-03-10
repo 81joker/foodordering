@@ -1,4 +1,5 @@
 @extends('website.layouts.app')
+@section('title', 'Foods')
 
 @section('content')
     <section class="food-found">

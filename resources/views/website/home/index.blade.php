@@ -1,4 +1,5 @@
 @extends('website.layouts.app')
+@section('title', 'Home')
 
 @section('content')
     <section>

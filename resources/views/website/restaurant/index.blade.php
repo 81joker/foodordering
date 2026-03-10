@@ -1,5 +1,5 @@
 @extends('website.layouts.app')
-
+@section('title', 'Restutants')
 @section('content')
     <div class="bread-crumbs-wrapper">
         <div class="container">
