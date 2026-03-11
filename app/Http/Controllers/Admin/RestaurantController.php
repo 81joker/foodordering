@@ -34,8 +34,6 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantRequest $request)
     {
-
-        // Création simple (sans image)
         $restaurant = Restaurant::create([
             'restaurant_name' => $request->restaurant_name,
             'address' => $request->address,
@@ -51,28 +49,14 @@ class RestaurantController extends Controller
 
         // 3. Multi-upload d’images
         if ($request->hasFile('images')) {
-
             $folderPath = public_path('images/restaurants/' . $restaurant->id);
-
-            // Créer le dossier
             if (! file_exists($folderPath)) {
                 mkdir($folderPath, 0777, true);
             }
-
-            $i = 1; // pour 1.jpg, 2.jpg, ...
-
+            $i = 1;
             foreach ($request->file('images') as $image) {
-
-                // récupérer le nom original fourni par ton input
-                // $imageName = $image->getClientOriginalName();
-                // // exemple : 1.jpg, 3.png, photo.jpeg
-
-                // // déplacer dans le dossier final
-                // $image->move($folderPath, $imageName);
-
-                $image = $request->file('images')[0];
-
-                $image->move($folderPath, 'logo.png');
+                $imageName = $image->getClientOriginalName();
+                $image->move($folderPath, $imageName);
             }
         }
 
@@ -91,7 +75,6 @@ class RestaurantController extends Controller
 
     public function update(RestaurantRequest $request, Restaurant $restaurant)
     {
-        // Mise à jour
         $restaurant->update([
             'restaurant_name' => $request->restaurant_name,
             'address' => $request->address,
@@ -99,7 +82,6 @@ class RestaurantController extends Controller
             'description' => $request->description,
         ]);
 
-        // Mise à jour des cuisines
         $restaurant->cuisines()->sync($request->cuisines_id ?? []);
         // 3. Dossier
         $folder = public_path('images/restaurants/' . $restaurant->id);
@@ -110,17 +92,13 @@ class RestaurantController extends Controller
         // 4. Si l’utilisateur a envoyé des nouvelles images
         if ($request->hasFile('images')) {
 
-            // 🔥 Supprimer toutes les anciennes images
             $oldFiles = glob($folder . '/*');
             foreach ($oldFiles as $file) {
                 if (is_file($file)) {
                     unlink($file);
                 }
             }
-
-            // 🔥 Ajouter les nouvelles images
             foreach ($request->file('images') as $image) {
-
                 $imageName = $image->getClientOriginalName();
                 $image->move($folder, $imageName);
             }

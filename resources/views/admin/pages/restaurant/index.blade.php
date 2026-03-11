@@ -36,15 +36,13 @@
                                         <td>{{ $restaurant->id }}</td>
                                         <td>
                                             @php
-                                                $imagePath = public_path(
-                                                    "images/restaurants/{$restaurant->id}/logo.png",
-                                                );
+                                                $folder = public_path("images/restaurants/{$restaurant->id}");
+                                                $images = glob($folder . '/*');
                                             @endphp
-
-                                            @if (file_exists($imagePath))
-                                                <img src="{{ asset("images/restaurants/{$restaurant->id}/logo.png") }}"
-                                                    alt="{{ $restaurant->name }}" width="60" height="60"
-                                                    style="object-fit:cover; border-radius:5px;">
+                                            @if (!empty($images))
+                                                <img src="{{ asset('images/restaurants/' . $restaurant->id . '/' . basename($images[0])) }}"
+                                                    width="60" height="60"
+                                                    style="object-fit:cover;border-radius:5px;">
                                             @else
                                                 <span class="text-muted">No image</span>
                                             @endif
