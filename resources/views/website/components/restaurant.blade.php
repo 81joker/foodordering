@@ -3,9 +3,17 @@
 
         <div class="featured-restaurant-thumb">
             <a href="{{ route('website.restaurants.show', $restaurant->id) }}">
-                <img src="{{ asset("images/restaurants/{$restaurant->id}/logo.png") }}"
-                    onerror="this.src='{{ asset('images/no-img.png') }}'"
-                    style="width: 100%; height: auto; border-radius: 10px;" alt="{{ $restaurant->restaurant_name }}">
+                @php
+                    $folder = public_path("images/restaurants/{$restaurant->id}");
+                    $images = glob($folder . '/*');
+                @endphp
+                @if (!empty($images))
+                    <img src="{{ asset('images/restaurants/' . $restaurant->id . '/' . basename($images[0])) }}"
+                        style="width: 100%; height: auto; border-radius: 10px;" alt="{{ $restaurant->restaurant_name }}">
+                @else
+                    <img src="{{ asset('images/no-img.png') }}" style="width: 100%; height: auto; border-radius: 10px;"
+                        alt="{{ $restaurant->restaurant_name }}">
+                @endif
             </a>
         </div>
 

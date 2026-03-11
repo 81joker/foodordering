@@ -51,7 +51,7 @@ class RestaurantController extends Controller
         if ($request->hasFile('images')) {
             $folderPath = public_path('images/restaurants/' . $restaurant->id);
             if (! file_exists($folderPath)) {
-                mkdir($folderPath, 0777, true);
+                mkdir($folderPath, 0755, true);
             }
             $i = 1;
             foreach ($request->file('images') as $image) {
