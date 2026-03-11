@@ -18,6 +18,8 @@ class Restaurant extends Model
         'avg_rating',
         'total_orders',
         'is_open',
+        'delivery_fee',
+        'description',
     ];
 
     public function foods()

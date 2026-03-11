@@ -22,7 +22,7 @@ class RestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'restaurant_name' => 'required|string|max:255',
             'address' => 'nullable|string|max:255',
             'delivery_fee' => 'required|numeric|min:0',
             'description' => 'nullable|string',

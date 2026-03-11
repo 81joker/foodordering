@@ -34,9 +34,10 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantRequest $request)
     {
+
         // Création simple (sans image)
         $restaurant = Restaurant::create([
-            'name' => $request->name,
+            'restaurant_name' => $request->restaurant_name,
             'address' => $request->address,
             'delivery_fee' => $request->delivery_fee,
             'description' => $request->description,
@@ -51,7 +52,7 @@ class RestaurantController extends Controller
         // 3. Multi-upload d’images
         if ($request->hasFile('images')) {
 
-            $folderPath = public_path('images/restaurants/'.$restaurant->id);
+            $folderPath = public_path('images/restaurants/' . $restaurant->id);
 
             // Créer le dossier
             if (! file_exists($folderPath)) {
@@ -92,7 +93,7 @@ class RestaurantController extends Controller
     {
         // Mise à jour
         $restaurant->update([
-            'name' => $request->name,
+            'restaurant_name' => $request->restaurant_name,
             'address' => $request->address,
             'delivery_fee' => $request->delivery_fee,
             'description' => $request->description,
@@ -101,7 +102,7 @@ class RestaurantController extends Controller
         // Mise à jour des cuisines
         $restaurant->cuisines()->sync($request->cuisines_id ?? []);
         // 3. Dossier
-        $folder = public_path('images/restaurants/'.$restaurant->id);
+        $folder = public_path('images/restaurants/' . $restaurant->id);
         if (! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
@@ -110,7 +111,7 @@ class RestaurantController extends Controller
         if ($request->hasFile('images')) {
 
             // 🔥 Supprimer toutes les anciennes images
-            $oldFiles = glob($folder.'/*');
+            $oldFiles = glob($folder . '/*');
             foreach ($oldFiles as $file) {
                 if (is_file($file)) {
                     unlink($file);
@@ -133,13 +134,13 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         // 1. Chemin du dossier images
-        $folder = public_path('images/restaurants/'.$restaurant->id);
+        $folder = public_path('images/restaurants/' . $restaurant->id);
 
         // 2. Supprimer le dossier si existe
         if (file_exists($folder)) {
 
             // supprimer tous les fichiers
-            $files = glob($folder.'/*');
+            $files = glob($folder . '/*');
             foreach ($files as $file) {
                 if (is_file($file)) {
                     unlink($file);

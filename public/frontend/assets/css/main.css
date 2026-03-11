@@ -3048,8 +3048,8 @@ footer {
     margin-top: 0;
 }
 .featured-restaurant-box.with-bg .featured-restaurant-thumb {
-    padding: 0 15px 0 0;
-    width: 60px;
+    /* padding: 0 15px 0 0; */
+    width: 100px;
     border-right: 1px solid #f8f8f8;
 }
 .featured-restaurant-box.with-bg .featured-restaurant-info {

@@ -20,7 +20,7 @@ class RestaurantController extends Controller
             $query->whereHas('cuisines', function ($q) use ($cuisineId) {
                 $q->where('cuisine_id', $cuisineId);
             });
-        })
+        })->orderBy('created_at', 'desc')
             ->with('cuisines')
             ->paginate(6);
 

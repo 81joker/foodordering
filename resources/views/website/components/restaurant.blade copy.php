@@ -1,11 +1,13 @@
-<div class="col-md-6 col-sm-6 col-lg-6" style="overflow: hidden">
+<div class="col-md-6 col-sm-6 col-lg-6">
     <div class="featured-restaurant-box with-bg style2 brd-rd12">
 
         <div class="featured-restaurant-thumb">
             <a href="{{ route('website.restaurants.show', $restaurant->id) }}">
-                <img src="{{ asset("images/restaurants/{$restaurant->id}/logo.png") }}"
-                    onerror="this.src='{{ asset('images/no-img.png') }}'"
-                    style="width: 100%; height: auto; border-radius: 10px;" alt="{{ $restaurant->restaurant_name }}">
+                <img 
+                    src="{{ asset("images/restaurants/{$restaurant->id}/logo.png") }}"
+                    onerror="this.src='{{ asset("images/no-img.png") }}'"
+                    alt="{{ $restaurant->name }}"
+                >
             </a>
         </div>
 
@@ -14,17 +16,14 @@
 
             <h4>
                 <a href="{{ route('website.restaurants.show', $restaurant->id) }}">
-                    {{ $restaurant->restaurant_name }}
+                    {{ $restaurant->name }}
                 </a>
             </h4>
 
             <span class="food-types">
                 Type of food:
                 @foreach ($restaurant->cuisines as $cuisine)
-                    <a href="#">{{ $cuisine->name }}</a>
-                    @if (!$loop->last)
-                        ,
-                    @endif
+                    <a href="#">{{ $cuisine->name }}</a>@if(!$loop->last), @endif
                 @endforeach
             </span>
 
