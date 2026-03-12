@@ -29,13 +29,13 @@ class RestaurantController extends Controller
             //     ->with(['cuisines', 'foods'])
             //     ->paginate(6);
 
-            $restaurants = Restaurant::with(['foods','cuisines'])
-    ->where('restaurant_name','like',"%{$searchTerm}%")
-    ->orWhereHas('foods', function ($q) use ($searchTerm) {
-        $q->where('food_name','like',"%{$searchTerm}%");
-    })
-    ->latest()
-    ->paginate(6);
+            $restaurants = Restaurant::with(['foods', 'cuisines'])
+                ->where('restaurant_name', 'like', "%{$searchTerm}%")
+                ->orWhereHas('foods', function ($q) use ($searchTerm) {
+                    $q->where('food_name', 'like', "%{$searchTerm}%");
+                })
+                ->latest()
+                ->paginate(6);
 
         } else {
 

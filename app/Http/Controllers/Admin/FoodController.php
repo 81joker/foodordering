@@ -38,7 +38,6 @@ class FoodController extends Controller
     public function store(FoodRequest $request)
     {
         $food = Food::create($request->validated());
-       
 
         $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
@@ -65,11 +64,11 @@ class FoodController extends Controller
         //         $image->move($folder, $fileName);
         //     }
         // }
-      
-            // if ($request->hasFile('images')) {
-            //         $image = $request->file('images')[0];    
-            //         $image->move($folder, '1.jpg');
-            //     }
+
+        // if ($request->hasFile('images')) {
+        //         $image = $request->file('images')[0];
+        //         $image->move($folder, '1.jpg');
+        //     }
 
         return redirect()
             ->route('admin.foods.index')

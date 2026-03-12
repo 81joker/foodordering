@@ -1,7 +1,14 @@
 <div class="col-md-12 col-sm-12 col-lg-6 filter-item filter-item1">
     <div class="featured-restaurant-box wow fadeIn" data-wow-delay="0.2s">
         <div class="featured-restaurant-thumb">
-            <a href="food-detail.html" title="" itemprop="url"><img class="brd-rd50" src="{{ asset("images/foods/{$food->id}/1.jpg") }}" alt="featured-restaurant-img1.jpg" itemprop="image"></a>
+            <a href="food-detail.html" title="" itemprop="url">
+                @if (file_exists(public_path("images/foods/{$food->id}/1.jpg")))
+                    
+                <img class="brd-rd50" src="{{ asset("images/foods/{$food->id}/1.jpg") }}" alt="featured-restaurant-img1.jpg" itemprop="image">
+                @else
+                <img class="brd-rd50" src="{{ asset('images/no-img.png') }}" alt="featured-restaurant-img1.jpg" itemprop="image">
+                @endif
+            </a>
         </div>
         <div class="featured-restaurant-info">
             <span class="red-clr">{{ $restaurant->address }}</span>
