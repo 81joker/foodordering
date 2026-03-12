@@ -35,8 +35,6 @@ Route::get('/auth/github', [AuthController::class, 'redirectToGitHub'])->name('a
 Route::get('/auth/github/callback', [AuthController::class, 'handleGitHubCallback'])->name('auth.github.callback');
 Route::get('/sign-in/github/redirect', [AuthController::class, 'handleGitHubCallback'])->name('auth.github.callback.alt');
 
-
-
 Route::group([], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -58,7 +56,6 @@ Route::group([], function () {
 
     Route::post('/restaurants', [RestaurantController::class, 'index'])->name('restaurant.search');
 });
-
 
 // Admin Dashboard routes
 Route::middleware(IsAdmin::class)->prefix('admin')->name('admin.')->group(function () {

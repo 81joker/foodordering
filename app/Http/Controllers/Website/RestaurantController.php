@@ -27,13 +27,11 @@ class RestaurantController extends Controller
 
         // $cuisines = Cuisine::withCount(relations: 'restaurants')->get();
 
-
-
         $cuisineId = $request->query('cuisine');
         $cuisines = Cuisine::withCount(relations: 'restaurants')->get();
 
         if ($request->isMethod('post')) {
-            $searchTerm = $request->input('restaurant_name') ??  $request->input('food_name');
+            $searchTerm = $request->input('restaurant_name') ?? $request->input('food_name');
             $restaurants = Restaurant::query()
                 ->where('restaurant_name', 'like', "%{$searchTerm}%")
                 // ->orWhereHas('foods', function ($query) use ($searchTerm) {
@@ -45,15 +43,15 @@ class RestaurantController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->with('cuisines')
                 ->paginate(6);
-        } else {    
+        } else {
 
-        $restaurants = Restaurant::when($cuisineId, function ($query) use ($cuisineId) {
-            $query->whereHas('cuisines', function ($q) use ($cuisineId) {
-                $q->where('cuisine_id', $cuisineId);
-            });
-        })->orderBy('created_at', 'desc')
-            ->with('cuisines')
-            ->paginate(6);
+            $restaurants = Restaurant::when($cuisineId, function ($query) use ($cuisineId) {
+                $query->whereHas('cuisines', function ($q) use ($cuisineId) {
+                    $q->where('cuisine_id', $cuisineId);
+                });
+            })->orderBy('created_at', 'desc')
+                ->with('cuisines')
+                ->paginate(6);
         }
 
         return view('website.restaurant.index', compact('restaurants', 'cuisines', 'cuisineId'));
