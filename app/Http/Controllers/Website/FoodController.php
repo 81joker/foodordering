@@ -17,6 +17,7 @@ class FoodController extends Controller
             $query->where('cuisine_id', $cuisineId);
         })
             ->with('restaurant')
+            ->orderBy('created_at', 'desc')
             ->paginate(6);
 
         $cuisines = Cuisine::withCount('foods')->get();

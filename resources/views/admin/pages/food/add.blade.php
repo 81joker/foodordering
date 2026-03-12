@@ -12,20 +12,20 @@
                             </div> 
                         </div>
                         
-                        <form action="{{ route('admin.foods.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route(name: 'admin.foods.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Food Name</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input 
-                                        class="form-control @error('name') is-invalid @enderror" 
+                                        class="form-control @error('food_name') is-invalid @enderror" 
                                         type="text" 
                                         placeholder="Pork Tenderloin Marinated" 
-                                        name="name" 
-                                        value="{{ old('name') }}"
+                                        name="food_name" 
+                                        value="{{ old('food_name') }}"
                                     />
-                                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('food_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -36,7 +36,7 @@
                                         <option value="">Choose Restaurant...</option>
                                         @foreach($restaurants as $restaurant)
                                             <option value="{{ $restaurant->id }}" {{ old('restaurant_id') == $restaurant->id ? 'selected' : '' }}>
-                                                {{ $restaurant->name }}
+                                                {{ $restaurant->restaurant_name }}
                                             </option>
                                         @endforeach
                                     </select>

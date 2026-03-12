@@ -22,7 +22,7 @@ class FoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'food_name' => 'required|string|max:255',
             'restaurant_id' => 'required|exists:restaurants,id',
             'cuisine_id' => 'nullable|exists:cuisines,id',
             'price' => 'required|numeric|min:0',

@@ -56,9 +56,9 @@
                                                 <span class="text-muted">No image</span>
                                             @endif
                                         </td>
-                                        <td>{{ $food->name }}</td>
+                                        <td>{{ $food->food_name }}</td>
                                         <td>{{ $food->cuisine ? $food->cuisine->name : '-' }}</td>
-                                        <td>{{ $food->restaurant ? $food->restaurant->name : '-' }}</td>
+                                        <td>{{ $food->restaurant ? $food->restaurant->restaurant_name : '-' }}</td>
                                         <td>{{ number_format($food->price, 2) }}</td>
                                         <td><span class="badge badge-warning">{{ $food->avg_rating }}</span></td>
                                         <td>
