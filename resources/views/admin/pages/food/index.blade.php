@@ -45,13 +45,12 @@
                                         <td scope="row">{{ $food->id }}</th>
                                         <td>
                                             @php
-                                                $imagePath = public_path("images/foods/{$food->id}/1.jpg");
+                                                $imagePath = public_path("images/foods/{$food->id}");
+                                                $images = glob($imagePath . '/*');
                                             @endphp
-
-                                            @if (file_exists($imagePath))
-                                                <img src="{{ asset('images/foods/' . $food->id . '/1.jpg') }}"
-                                                    alt="{{ $food->name }}" width="60" height="60"
-                                                    style="object-fit:cover; border-radius:5px;">
+                                            @if (!empty($images))
+                                                <img src="{{ asset('images/foods/' . $food->id . '/' . basename($images[0])) }}"
+                                                    width="60" height="60" style="object-fit:cover;border-radius:5px;">
                                             @else
                                                 <span class="text-muted">No image</span>
                                             @endif
@@ -62,8 +61,7 @@
                                         <td>{{ number_format($food->price, 2) }}</td>
                                         <td><span class="badge badge-warning">{{ $food->avg_rating }}</span></td>
                                         <td>
-                                            <a href="{{ route('admin.foods.edit', $food->id) }}"
-                                                class="btn btn-success btn-sm">
+                                            <a href="{{ route('admin.foods.edit', $food->id) }}" class="btn btn-success btn-sm">
                                                 <i class="fa fa-pencil-square-o"></i>
                                             </a>
 

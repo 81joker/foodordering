@@ -38,35 +38,38 @@ class FoodController extends Controller
     public function store(FoodRequest $request)
     {
         $food = Food::create($request->validated());
-        // Créer dossier images
+       
+
         $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
-
-        // Upload des images
         if ($request->hasFile('images')) {
+
+            $oldFiles = glob($folder.'/*');
+            foreach ($oldFiles as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
             foreach ($request->file('images') as $image) {
-                $fileName = $image->getClientOriginalName();
-                $image->move($folder, $fileName);
+                $imageName = $image->getClientOriginalName();
+                $image->move($folder, $imageName);
             }
         }
-        // if ($request->hasFile('images')) {
-        //     $image = $request->file('images')[0];
 
-        //     $image->move($folder, '1.jpg');
-        // }
-        //  if ($request->hasFile('images')) {
-        //     $folderPath = public_path('images/restaurants/' . $restaurant->id);
-        //     if (! file_exists($folderPath)) {
-        //         mkdir($folderPath, 0755, true);
-        //     }
-        //     $i = 1;
+        // Upload des images
+        // if ($request->hasFile('images')) {
         //     foreach ($request->file('images') as $image) {
-        //         $imageName = $image->getClientOriginalName();
-        //         $image->move($folderPath, $imageName);
+        //         $fileName = $image->getClientOriginalName();
+        //         $image->move($folder, $fileName);
         //     }
         // }
+      
+            // if ($request->hasFile('images')) {
+            //         $image = $request->file('images')[0];    
+            //         $image->move($folder, '1.jpg');
+            //     }
 
         return redirect()
             ->route('admin.foods.index')
