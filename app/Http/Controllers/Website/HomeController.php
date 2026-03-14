@@ -40,8 +40,8 @@ class HomeController extends Controller
             ->orderByDesc('order_items_sum_quantity')
             ->take(5)
             ->get();
-            // dd($popularFoods);  
-        /*        
+        // dd($popularFoods);
+        /*
         * @var \Illuminate\Database\Eloquent\Collection $foods
         */
         $foods = Food::with('restaurant')->latest()->take(2)->get();
