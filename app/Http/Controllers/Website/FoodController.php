@@ -14,7 +14,7 @@ class FoodController extends Controller
         $cuisineId = $request->query('cuisine');
 
         $foods = Food::when($cuisineId, function ($query) use ($cuisineId) {
-            $query->where('cuisine_id', $cuisineId);
+            $query->where('updated_at', $cuisineId);
         })
             ->with('restaurant')
             ->orderBy('created_at', 'desc')
