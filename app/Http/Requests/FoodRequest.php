@@ -27,7 +27,7 @@ class FoodRequest extends FormRequest
             'cuisine_id' => 'nullable|exists:cuisines,id',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
-            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }
