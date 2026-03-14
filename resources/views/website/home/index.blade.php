@@ -15,7 +15,7 @@
                                 <i class="brd-rd50"><img src="frontend/assets/images/resource/fact-icon1.png"
                                         alt="fact-icon1" itemprop="image"></i>
                                 <div class="fact-inner">
-                                    <strong><span class="counter">137</span></strong>
+                                    <strong><span class="counter">{{ $restaurant_count }}</span></strong>
                                     <h5>Restaurant</h5>
                                 </div>
                             </div><!-- Fact Box -->
@@ -45,7 +45,7 @@
                                 <i class="brd-rd50"><img src="frontend/assets/images/resource/fact-icon4.png"
                                         alt="fact-icon4" itemprop="image"></i>
                                 <div class="fact-inner">
-                                    <strong><span class="counter">235</span></strong>
+                                    <strong><span class="counter">{{ $users_count }}</span></strong>
                                     <h5>Regular users</h5>
                                 </div>
                             </div><!-- Fact Box -->

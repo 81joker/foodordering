@@ -119,7 +119,7 @@ $(document).ready(function(){
   if ($.isFunction($.fn.counterUp)) {
     $('.counter').counterUp({
       delay: 10,
-      time: 2000
+      time: 300
     });
   }
 
