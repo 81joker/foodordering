@@ -126,28 +126,78 @@
                             </div>
                         </div>
                         <div class="row remove-ext5">
-                            <div class="col-md-4 col-sm-6 col-lg-4">
+                            @foreach ($foods as $food )
+                                          <div class="col-md-4 col-sm-6 col-lg-4">
                                 <div class="popular-dish-box wow fadeIn" data-wow-delay="0.2s">
                                     <div class="popular-dish-thumb">
-                                        <a href="food-detail.html" title="" itemprop="url"><img
-                                                src="frontend/assets/images/resource/popular-dish-img1.jpg"
-                                                alt="popular-dish-img1.jpg" itemprop="image"></a>
+                                        <a href="food-detail.html" title="" itemprop="url">
+
+                                            {{-- <img
+                                                src="{{ asset('images/foods/' . $food->image) }}"
+                                                alt="{{ $food->food_name }}" itemprop="image"> --}}
+
+                                                               @php
+                    $folder = public_path("images/foods/{$food->id}");
+                    $images = glob($folder . '/*');
+                @endphp
+                @if (!empty($images))
+                    <img src="{{ asset('images/foods/' . $food->id . '/' . basename($images[0])) }}"
+                        alt="{{ $food->food_name }}" itemprop="image">
+                @else
+                    <img src="{{ asset('images/no-img.png') }}" 
+                        alt="{{ $food->food_name }}" itemprop="image">
+                @endif
+                                            
+                                            </a>
                                         <span class="post-rate yellow-bg brd-rd2"><i class="fa fa-star-o"></i> 4.25</span>
                                         <span class="post-likes brd-rd4"><i class="fa fa-heart-o"></i> 12</span>
                                     </div>
                                     <div class="popular-dish-info">
                                         <h4 itemprop="headline"><a href="food-detail.html" title=""
                                                 itemprop="url">
-                                                Maenaam Thai Restaurant</a>
+                                               {{ $food->food_name }}</a>
                                         </h4>
-                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry</p>
-                                        <span class="price">$85.00</span>
+                                        <p itemprop="description">{{ Str::limit($food->description, 100) }}</p>
+                                        <span class="price">${{ $food->price }}</span>
                                         <a class="brd-rd2" href="food-detail.html" title="Order Now"
                                             itemprop="url">Order Now</a>
                                         <div class="restaurant-info">
                                             <img src="frontend/assets/images/resource/restaurant-logo1.png"
                                                 alt="restaurant-logo1.png" itemprop="image">
+                                            <div class="restaurant-info-inner">
+                                                <h6 itemprop="headline"><a href="restaurant-detail.html" title=""
+                                                        itemprop="url">{{ $food->restaurant->restaurant_name }}</a></h6>
+                                                <span class="red-clr">{{ $food->restaurant->address }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- Popular Dish Box -->
+                            </div> 
+                            @endforeach
+                 
+
+                            <div class="col-md-4 col-sm-6 col-lg-4">
+                                <div class="popular-dish-box wow fadeIn" data-wow-delay="0.4s">
+                                    <div class="popular-dish-thumb">
+                                        <a href="food-detail.html" title="" itemprop="url"><img
+                                                src="frontend/assets/images/resource/popular-dish-img2.jpg"
+                                                alt="popular-dish-img2.jpg" itemprop="image"></a>
+                                        <span class="post-rate yellow-bg brd-rd2"><i class="fa fa-star-o"></i> 3.25</span>
+                                        <span class="post-likes brd-rd4"><i class="fa fa-heart-o"></i> 10</span>
+                                    </div>
+                                    <div class="popular-dish-info">
+                                        <h4 itemprop="headline"><a href="food-detail.html" title=""
+                                                itemprop="url"> This fake
+                                                Champignon somen Noodles</a>
+                                        </h4>
+                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing and
+                                            typesetting industry</p>
+                                        <span class="price">$70.00</span>
+                                        <a class="brd-rd2" href="food-detail.html" title="Order Now"
+                                            itemprop="url">Order Now</a>
+                                        <div class="restaurant-info">
+                                            <img src="frontend/assets/images/resource/restaurant-logo1.png"
+                                                alt="restaurant-logo2.png" itemprop="image">
                                             <div class="restaurant-info-inner">
                                                 <h6 itemprop="headline"><a href="restaurant-detail.html" title=""
                                                         itemprop="url">Fabio al Porto Ristorante</a></h6>
@@ -157,7 +207,7 @@
                                     </div>
                                 </div><!-- Popular Dish Box -->
                             </div>
-                            <div class="col-md-4 col-sm-6 col-lg-4">
+                            {{-- <div class="col-md-4 col-sm-6 col-lg-4">
                                 <div class="popular-dish-box wow fadeIn" data-wow-delay="0.4s">
                                     <div class="popular-dish-thumb">
                                         <a href="food-detail.html" title="" itemprop="url"><img
@@ -217,7 +267,7 @@
                                         </div>
                                     </div>
                                 </div><!-- Popular Dish Box -->
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

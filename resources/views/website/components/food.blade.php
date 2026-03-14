@@ -13,7 +13,6 @@
                     <img src="{{ asset('images/no-img.png') }}"class="brd-rd50"
                         alt="{{ $food->food_name }}" style="width: 100px;height:100px;object-fit: cover; display: block;">
                 @endif
-            
             </a>
         </div>
         <div class="featured-restaurant-info">
