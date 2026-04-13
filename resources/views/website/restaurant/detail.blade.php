@@ -395,7 +395,7 @@
                                         <div class="col-md-4 col-sm-12 col-lg-4">
                                             <div class="order-wrapper right wow fadeIn" data-wow-delay="0.2s">
                                                 <div class="order-inner gradient-brd">
-                                                    <h4 itemprop="headline">Your Order</h4>
+                                                    <h4 itemprop="headline">Your Orderxx</h4>
                                                     <div class="order-list-wrapper">
                                                         <ul class="order-list-inner">
                                                             <li>
