@@ -51,7 +51,7 @@
 
                                                                 @php $subtotal = 0; @endphp
 
-                                                                @foreach (session('cart', []) as $id => $item)
+                                                                @foreach (session('cart', []) as $key => $item)
                                                                     @php
                                                                         $price = (float) $item['price']; // convertir en float
                                                                         $qty = (int) $item['quantity']; // convertir en int
@@ -64,6 +64,11 @@
                                                                             <!-- Name -->
                                                                             <div class="order-list-name">
                                                                                 {{ $item['name'] }}
+                                                                                @if (!empty($item['variant_name']))
+                                                                                    <small style="display:block; color:#888;">
+                                                                                        Variant: {{ $item['variant_name'] }}
+                                                                                    </small>
+                                                                                @endif
                                                                             </div>
                                                                             <!-- price -->
                                                                             <div class="order-list-ut">
@@ -73,7 +78,7 @@
                                                                             <!-- Qty -->
                                                                             <div class="qty-wrap">
                                                                                 <input class="qty" type="number"
-                                                                                    name="quantity[{{ $item['id'] }}]"
+                                                                                    name="quantity[{{ $key }}]"
                                                                                     value="{{ $qty }}"
                                                                                     min="1"
                                                                                     style="width:60px; text-align:center;">
@@ -90,8 +95,8 @@
                                                                                 <form action="{{ route('cart.remove') }}"
                                                                                     method="POST">
                                                                                     @csrf
-                                                                                    <input type="hidden" name="food_id"
-                                                                                        value="{{ $item['id'] }}">
+                                                                                    <input type="hidden" name="cart_key"
+                                                                                        value="{{ $key }}">
                                                                                     <button type="submit"
                                                                                         class="btn btn-sm btn-danger">
                                                                                         <i class="fa fa-trash"></i>

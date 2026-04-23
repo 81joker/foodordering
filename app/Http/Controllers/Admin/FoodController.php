@@ -37,7 +37,9 @@ class FoodController extends Controller
      */
     public function store(FoodRequest $request)
     {
-        $food = Food::create($request->validated());
+        $validated = $request->validated();
+        $food = Food::create(collect($validated)->except('variants')->toArray());
+        $this->syncVariants($food, $validated['variants'] ?? []);
 
         $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
@@ -80,6 +82,7 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
+        $food->load('variants');
         $restaurants = Restaurant::all();
         $cuisines = Cuisine::all();
 
@@ -91,7 +94,9 @@ class FoodController extends Controller
      */
     public function update(FoodRequest $request, Food $food)
     {
-        $food->update($request->validated());
+        $validated = $request->validated();
+        $food->update(collect($validated)->except('variants')->toArray());
+        $this->syncVariants($food, $validated['variants'] ?? []);
 
         $folder = public_path('images/foods/'.$food->id);
         if (! file_exists($folder)) {
@@ -145,5 +150,25 @@ class FoodController extends Controller
         return redirect()
             ->route('admin.foods.index')
             ->with('success', 'Food deleted successfully.');
+    }
+
+    private function syncVariants(Food $food, array $variants): void
+    {
+        $food->variants()->delete();
+
+        $cleanVariants = collect($variants)
+            ->filter(function ($variant) {
+                return ! empty($variant['name']) && isset($variant['price']);
+            })
+            ->values();
+
+        foreach ($cleanVariants as $index => $variant) {
+            $food->variants()->create([
+                'name' => $variant['name'],
+                'price' => $variant['price'],
+                'sort_order' => $index,
+                'is_available' => true,
+            ]);
+        }
     }
 }

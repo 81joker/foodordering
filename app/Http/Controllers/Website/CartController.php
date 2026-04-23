@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use App\Models\FoodVariant;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -11,7 +12,18 @@ class CartController extends Controller
     // ADD ITEM
     public function add(Request $request)
     {
+        $request->validate([
+            'food_id' => 'required|exists:food,id',
+            'quantity' => 'required|integer|min:1',
+            'food_variant_id' => 'nullable|exists:food_variants,id',
+        ]);
+
         $food = Food::findOrFail($request->food_id);
+        $variant = null;
+        if ($request->filled('food_variant_id')) {
+            $variant = FoodVariant::where('food_id', $food->id)
+                ->findOrFail($request->food_variant_id);
+        }
         $cart = session()->get('cart', []);
 
         if (! empty($cart)) {
@@ -22,17 +34,22 @@ class CartController extends Controller
             }
         }
 
-        if (isset($cart[$food->id])) {
-            $cart[$food->id]['quantity'] += $request->quantity;
+        $cartKey = $food->id.':'.($variant?->id ?? 'base');
+
+        if (isset($cart[$cartKey])) {
+            $cart[$cartKey]['quantity'] += $request->quantity;
         } else {
             // otherwise add
-            $cart[$food->id] = [
+            $cart[$cartKey] = [
+                'key' => $cartKey,
                 'id' => $food->id,
-                'name' => $food->name,
-                'price' => (float) $food->price,
+                'name' => $food->food_name,
+                'price' => (float) ($variant?->price ?? $food->price),
                 'quantity' => $request->quantity,
                 'restaurant_id' => $food->restaurant_id,
                 'image' => $food->image ?? null,
+                'variant_id' => $variant?->id,
+                'variant_name' => $variant?->name,
             ];
         }
 
@@ -49,9 +66,9 @@ class CartController extends Controller
 
         // Update ALL quantities
         if ($request->has('update_all')) {
-            foreach ($request->quantity as $id => $qty) {
-                if (isset($cart[$id])) {
-                    $cart[$id]['quantity'] = max(1, (int) $qty);
+            foreach ($request->quantity as $key => $qty) {
+                if (isset($cart[$key])) {
+                    $cart[$key]['quantity'] = max(1, (int) $qty);
                 }
             }
             session()->put('cart', $cart);
@@ -60,9 +77,9 @@ class CartController extends Controller
         }
 
         // Update SINGLE item
-        if ($request->filled('food_id') && $request->filled('quantity')) {
-            $id = $request->food_id;
-            $cart[$id]['quantity'] = max(1, (int) $request->quantity);
+        if ($request->filled('cart_key') && $request->filled('quantity')) {
+            $key = $request->cart_key;
+            $cart[$key]['quantity'] = max(1, (int) $request->quantity);
             session()->put('cart', $cart);
 
             return back();
@@ -76,8 +93,8 @@ class CartController extends Controller
     {
         $cart = session()->get('cart');
 
-        if (isset($cart[$request->food_id])) {
-            unset($cart[$request->food_id]);
+        if (isset($cart[$request->cart_key])) {
+            unset($cart[$request->cart_key]);
             session()->put('cart', $cart);
         }
 

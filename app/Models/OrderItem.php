@@ -9,6 +9,8 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'food_id',
+        'food_variant_id',
+        'food_variant_name',
         'quantity',
         'price',
     ];
@@ -21,5 +23,10 @@ class OrderItem extends Model
     public function food()
     {
         return $this->belongsTo(Food::class);
+    }
+
+    public function variant()
+    {
+        return $this->belongsTo(FoodVariant::class, 'food_variant_id');
     }
 }

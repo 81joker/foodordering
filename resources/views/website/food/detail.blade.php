@@ -61,9 +61,9 @@
                                                 </ul>
                                             </div>
                                             <div class="restaurant-detail-title">
-                                                <h1 itemprop="headline">{{ $food->name }}</h1>
+                                                <h1 itemprop="headline">{{ $food->food_name }}</h1>
                                                 <div class="info-meta">
-                                                    <span>{{ $food->name }}</span>
+                                                    <span>{{ $food->food_name }}</span>
                                                     <span><a href="#" title=""
                                                             itemprop="url">{{ $food->restaurant->name }}</a></span>
                                                 </div>
@@ -77,6 +77,19 @@
                                                     method="POST">
                                                     @csrf
                                                     <input type="hidden" name="food_id" value="{{ $food->id }}">
+                                                    @if ($food->variants->isNotEmpty())
+                                                        <div style="margin: 12px 0;">
+                                                            <label><strong>Choose variant:</strong></label>
+                                                            <select name="food_variant_id" class="form-control" required>
+                                                                <option value="">Select variant</option>
+                                                                @foreach ($food->variants as $variant)
+                                                                    <option value="{{ $variant->id }}">
+                                                                        {{ $variant->name }} - ${{ number_format($variant->price, 2) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    @endif
                                                     <div class="qty-wrap">
                                                         <input class="qty" type="number" name="quantity" value="1"
                                                             min="1">
