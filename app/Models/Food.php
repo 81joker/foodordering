@@ -40,4 +40,9 @@ class Food extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function variants()
+    {
+        return $this->hasMany(FoodVariant::class)->orderBy('sort_order')->orderBy('id');
+    }
 }

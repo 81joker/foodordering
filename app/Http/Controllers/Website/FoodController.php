@@ -28,7 +28,7 @@ class FoodController extends Controller
     public function show($id)
     {
 
-        $food = Food::with('restaurant')->findOrFail($id);
+        $food = Food::with(['restaurant', 'variants'])->findOrFail($id);
 
         return view('website.food.detail', compact('food'));
     }

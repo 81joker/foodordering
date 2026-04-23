@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class FoodVariant extends Model
+{
+    protected $fillable = [
+        'food_id',
+        'name',
+        'price',
+        'is_available',
+        'sort_order',
+    ];
+
+    public function food()
+    {
+        return $this->belongsTo(Food::class);
+    }
+}

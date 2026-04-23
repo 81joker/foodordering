@@ -87,6 +87,43 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Variants</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="text-muted">Examples: Mushroom, Beef, Chicken.</p>
+                                    @php
+                                        $existingVariants = old('variants', $food->variants->map(fn ($variant) => [
+                                            'name' => $variant->name,
+                                            'price' => $variant->price,
+                                        ])->toArray());
+                                        $variantRows = max(3, count($existingVariants));
+                                    @endphp
+                                    @for($i = 0; $i < $variantRows; $i++)
+                                        <div class="row mb-2">
+                                            <div class="col-md-7">
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    name="variants[{{ $i }}][name]"
+                                                    placeholder="Variant name (e.g. Mushroom Pizza)"
+                                                    value="{{ $existingVariants[$i]['name'] ?? '' }}"
+                                                />
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input
+                                                    class="form-control"
+                                                    type="number"
+                                                    step="0.01"
+                                                    name="variants[{{ $i }}][price]"
+                                                    placeholder="Variant price"
+                                                    value="{{ $existingVariants[$i]['price'] ?? '' }}"
+                                                />
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>
+
                             <div class="clearfix mb-20">
                                 <div class="pull-right">
                                     <button class="btn btn-primary btn-sm" type="submit">Update</button>
